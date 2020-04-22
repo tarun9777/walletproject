@@ -1,0 +1,90 @@
+<div class="container" align="center">
+    <br><h2>Transfer</h2><br>
+    <div class="jumbotron" style="width: 70%;">
+        
+        <!-- alert on errors -->
+
+        <div class="alert-danger" *ngIf="passwordFlag.value">
+            Incorrect password
+        </div>
+        <div class="alert-danger" *ngIf="failure.value">
+            Invalid Account Number
+        </div>
+        <div class="alert-danger" *ngIf="balanceFlag.value">
+            Insufficient balance
+        </div>
+        <div class="alert-success" *ngIf="success.value">
+            Account validated
+        </div><br>
+
+        <!-- accountNumber -->
+        <form class="form-group" [formGroup] = "beneficiaryForm">
+            <div class="row">
+                <div class="col-6">
+                    <div *ngIf="beneficiaryForm.get('accountNumber').invalid && beneficiaryForm.get('accountNumber').touched">
+                        <small class="text-danger">*Field mandatory</small>
+                    </div>
+                    <label>Beneficiary Account Number:</label>
+                </div>
+                <div class="col-6 input-group mb-3">
+                    <input type="number"  class="form-control" formControlName="accountNumber" [class.is-invalid]="beneficiaryForm.get('accountNumber').invalid && beneficiaryForm.get('accountNumber').touched">
+                    <div class="input-group-append">
+                        <button [disabled]="!beneficiaryForm.valid" (click)="validate()" class="btn btn-primary">Validate</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        <form class="form-group" (ngSubmit)="submit()" [formGroup] = "transferForm">
+
+            <!-- amount -->
+            <div class="row">
+
+                <!-- validation -->
+                <div class="col-6">
+                    <div *ngIf="transferForm.get('amount').invalid && transferForm.get('amount').touched">
+                        <div *ngIf="transferForm.get('amount').errors?.required">
+                            <small class="text-danger">*Field mandatory</small>
+                        </div>
+                        <div *ngIf ="transferForm.get('amount').errors?.invalid_amount" >
+                            <small class="text-danger">*invalid amount</small>
+                        </div>
+                    </div>
+                    <label> Amount:</label>
+                </div>
+
+                <div class="col-6">
+                    <input type="number" formControlName="amount" class="form-control" [class.is-invalid] ="transferForm.get('amount').invalid && transferForm.get('amount').touched" >
+                </div>
+
+            </div><br>
+
+            <!-- password -->
+            <div class="row">
+                <!-- validation -->
+                <div class="col-6">
+                    <div *ngIf="transferForm.get('password').invalid && transferForm.get('password').touched">
+                        <div *ngIf="transferForm.get('password').errors?.required" >
+                            <small class="text-danger">*Field mandatory</small>
+                        </div>
+                        <div *ngIf="transferForm.get('password').errors?.minlength">
+                            <small class="text-danger">*password must be minimum 8 characters</small>
+                        </div>
+                    </div>
+                    <label >password:</label>
+                </div>
+
+                <div class="col-6">
+                    <input   type="password" [class.is-invalid]="transferForm.get('password').invalid && transferForm.get('password').touched" formControlName="password" class="form-control" >
+                </div>
+
+            </div><br>
+            <div align="center">
+            <input [disabled] = "!transferForm.valid" type="submit" class="btn btn-primary"  value="Transfer">
+        </div>
+
+        </form>
+    </div>
+</div>
+

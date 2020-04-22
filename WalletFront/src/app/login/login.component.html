@@ -1,0 +1,40 @@
+<div class="container" align="center" style="padding-top: 8%;">
+    
+    <div class="jumbotron" align="center" style="width: 30%; padding-bottom: 1%; padding-top: 4%;">
+        <h1>Login</h1><br>
+        <div *ngIf="failure.value" class="alert-danger">invalid id or password</div>
+        <form [formGroup] = "loginForm" (ngSubmit)="submit()" class="form-group"><br>
+            
+            <!-- customerID -->
+            <div *ngIf ="loginForm.get('customerId').invalid && loginForm.get('customerId').touched">
+                <small *ngIf="loginForm.get('customerId').errors?.required" class="text-danger">*Customer ID is madatory</small>
+                <small *ngIf="loginForm.get('customerId').errors?.notallowed" class="text-danger">*admin ID is not allowed</small>
+            </div>
+            <input type="number" [class.is-invalid] = "loginForm.get('customerId').invalid && loginForm.get('customerId').touched" formControlName = "customerId" class="form-control" style="text-align: center;" placeholder="customer ID"> <br>
+            
+            
+            <!-- password -->
+            <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+                <small *ngIf="loginForm.get('password').errors?.minlength" class="text-danger">*password must be minimum 8 characters</small>
+                <small *ngIf= "loginForm.get('password').errors?.required" class="text-danger">*password is madatory</small>
+            </div>
+            <input type="password" [class.is-invalid] = "loginForm.get('password').invalid && loginForm.get('password').touched" formControlName = "password" class="form-control" style="text-align: center; " placeholder="password"> <br>
+            
+            <!-- button -->
+            <div class="row">
+                <div class="col-6">
+                    <input [disabled] = "!loginForm.valid" type="submit" class="btn btn-primary" style="width: 80%;" value="Log In">
+                </div>
+                <div class="col-6">
+                    <input type="button" routerLink="/register" class="btn btn-success" style="width: 80%;" value="Register!"><br><br>  
+                </div>
+            </div>
+
+            <!-- links -->
+            <a routerLink="/adminLogin">Admin Login</a>
+        </form>
+        
+
+    </div>
+    
+</div>

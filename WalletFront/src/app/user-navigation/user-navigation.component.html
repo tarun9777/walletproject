@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <!-- navigation bar -->
+
+    <div class="navbar-nav">
+
+      <!-- links to navigate to different pages -->
+
+      <a class="nav-item nav-link" (click)="home()" style="cursor: pointer;"  >Home </a>
+      <a class="nav-item nav-link" (click)="updateDetails()" style="cursor: pointer;"   >Update Details</a>
+      <a class="nav-item nav-link" (click)="deposit()" style="cursor: pointer;" >Deposit</a>
+      <a class="nav-item nav-link" (click)="withdraw()" style="cursor: pointer;" >Withdraw</a>
+      <a class="nav-item nav-link" (click)="transfer()" style="cursor: pointer;" >Transfer</a>
+      <a class="nav-item nav-link" routerLink="/login" style="cursor: pointer;">Logout</a>
+      
+    </div>
+</nav>
+<router-outlet></router-outlet>
+

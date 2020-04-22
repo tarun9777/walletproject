@@ -1,0 +1,65 @@
+<div class="container" align="center">
+    <br><h2>Withdraw</h2><br>
+    <div class="jumbotron" style="width: 50%;">
+        <br>
+
+        <!-- alert bars -->
+
+        <div class="alert-danger" *ngIf="balanceFlag.value">
+            *Insufficient Balance
+        </div>
+        <div class="alert-danger" *ngIf="passwordFlag.value">
+            *Wrong password
+        </div>
+        <br>
+        <form class="form-group" (ngSubmit)="submits()" [formGroup] = "withdrawForm">
+
+            <!-- amount -->
+            <div class="row">
+
+                <!-- validation -->
+                <div class="col-6">
+                    <div *ngIf="withdrawForm.get('amount').invalid && withdrawForm.get('amount').touched">
+                        <div *ngIf="withdrawForm.get('amount').errors?.required">
+                            <small class="text-danger">*Field mandatory</small>
+                        </div>
+                        <div *ngIf ="withdrawForm.get('amount').errors?.invalid_amount" >
+                            <small class="text-danger">*invalid amount</small>
+                        </div>
+                    </div>
+                    <label> Amount:</label>
+                </div>
+
+                <div class="col-6">
+                    <input type="number" formControlName="amount" class="form-control" [class.is-invalid] ="withdrawForm.get('amount').invalid && withdrawForm.get('amount').touched" >
+                </div>
+
+            </div><br>
+
+            <!-- password -->
+            <div class="row">
+                <!-- validation -->
+                <div class="col-6">
+                    <div *ngIf="withdrawForm.get('password').invalid && withdrawForm.get('password').touched">
+                        <div *ngIf="withdrawForm.get('password').errors?.required" >
+                            <small class="text-danger">*Field mandatory</small>
+                        </div>
+                        <div *ngIf="withdrawForm.get('password').errors?.minlength">
+                            <small class="text-danger">*password must be minimum 8 characters</small>
+                        </div>
+                    </div>
+                    <label >password:</label>
+                </div>
+
+                <div class="col-6">
+                    <input type="password" [class.is-invalid]="withdrawForm.get('password').invalid && withdrawForm.get('password').touched" formControlName="password" class="form-control" >
+                </div>
+
+            </div><br>
+            <div align="center">
+            <input [disabled] = "!withdrawForm.valid" type="submit" class="btn btn-primary"  value="Withdraw">
+        </div>
+
+        </form>
+    </div>
+</div>

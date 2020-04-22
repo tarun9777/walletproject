@@ -1,0 +1,84 @@
+<div class="container" align="center">
+  <br />
+  <div class="row">
+      <div class="col-11">
+        <h2>Admin page</h2>
+      </div>
+      <div class="col-1">
+          <button class="btn btn-primary" routerLink="/login" >Logout</button>
+      </div>
+  </div>
+  <br />
+
+  <!-- table of available accounts -->
+
+  <h6>Account table</h6>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Customer Id</th>
+        <th scope="col">Account number</th>
+        <th scope="col">First name</th>
+        <th scope="col">lastname</th>
+        <th scope="col">operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of allAccounts">
+          <td #id>{{account.customerId}}</td>
+          <td>{{account.accountNumber}}</td>
+          <td>{{account.firstName}}</td>
+          <td>{{account.lastName}}</td>
+          <td>
+              <button class="btn btn-primary" (click)="getDetails(id.innerHTML)">Get Details</button>&nbsp; &nbsp;
+              <button class="btn btn-danger" (click)="deleteAccount(id.innerHTML)">Delete</button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- selected account details -->
+
+  <div class="jumbotron" *ngIf="detailsFlag.value">
+      <div class="row">
+            <div class="col-6">
+                <h5>Account Number: {{activeAccount.accountNumber}}</h5><br>
+                <h5>Customer Id: {{activeAccount.customerId}}</h5><br> 
+                <h5>Name: {{activeAccount.firstName + " " + activeAccount.lastName}}</h5><br>
+                <h5>Email: {{activeAccount.email}}</h5><br>
+                <h5>Contact Number: {{activeAccount.contactNumber}}</h5><br>
+            </div>
+            
+            
+            <div align="center" class="col-6">
+                <br><br><br><button class="btn btn-primary" (click)="showBalance()">Show Balance</button><br><br><br><br>
+                <button class="btn btn-primary"(click)="showTransactions()">Show Transactions</button>
+            </div><br>
+        </div>
+        <div *ngIf="balanceFlag.value" align="center">
+            <h5>balance: {{balance | currency : 'INR'}}</h5>
+        </div>
+  </div>
+
+  <!-- transaction table -->
+
+  <div align="center" *ngIf="transactionFlag.value">
+        <table class="table table-striped">
+            <thead class="thead-dark"> 
+                <tr >
+                    <th>Transaction ID</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let transaction of transactions" class="table-striped">
+                <tr >
+                    <td scope="row">{{transaction.transactionId}}</td>
+                    <td>{{transaction.transactionType}}</td>
+                    <td>{{transaction.amount | currency:'INR'}}</td>
+                </tr>
+            </tbody>            
+        </table>
+    </div>
+
+</div>
