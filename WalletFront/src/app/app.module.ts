@@ -19,6 +19,7 @@ import { AccountService } from "./account.service";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ErrorComponent } from './error/error.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ErrorComponent } from './error/error.component';
     PageNotFoundComponent,
     AdminHomepageComponent,
     ErrorComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,

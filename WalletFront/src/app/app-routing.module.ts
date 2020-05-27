@@ -11,12 +11,14 @@ import { DepositComponent } from "./deposit/deposit.component";
 import { WithdrawComponent } from "./withdraw/withdraw.component";
 import { TransferComponent } from "./transfer/transfer.component";
 import { AdminHomepageComponent } from "./admin-homepage/admin-homepage.component";
-import { ErrorComponent } from './error/error.component';
+import { ErrorComponent } from "./error/error.component";
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "adminLogin", component: AdminLoginComponent },
+  { path: "forgetPassword", component: ForgetPasswordComponent },
   {
     path: "navigation",
     component: UserNavigationComponent,
@@ -31,7 +33,7 @@ const routes: Routes = [
   },
   { path: "register", component: RegisterComponent },
   { path: "adminHome", component: AdminHomepageComponent },
-  {path:"error",component:ErrorComponent},
+  { path: "error", component: ErrorComponent },
   { path: "**", component: PageNotFoundComponent },
 ];
 

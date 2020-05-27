@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-
 @Injectable({
   providedIn: "root",
 })
@@ -49,6 +48,15 @@ export class AccountService {
     return fetch(this.baseUrl + "/addAccount", options);
   }
 
+  resetPassword(acc) {
+    let options = {
+      method: "POST",
+      body: JSON.stringify(acc),
+      headers: { "Content-Type": "application/json" },
+    };
+    return fetch(this.baseUrl + "/resetPassword", options);
+  }
+
   deposit(amount, id) {
     return fetch(this.baseUrl + "/deposit/" + id + "/" + amount);
   }
@@ -71,11 +79,10 @@ export class AccountService {
     return fetch(this.baseUrl + "/getAll");
   }
 
-  delete(id){
-    let options={
+  delete(id) {
+    let options = {
       method: "DELETE",
-    }
-    
-    return fetch(this.baseUrl + "/deleteAccount/" + id,options);
+    };
+    return fetch(this.baseUrl + "/deleteAccount/" + id, options);
   }
 }

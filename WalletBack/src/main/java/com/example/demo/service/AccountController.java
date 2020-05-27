@@ -37,13 +37,12 @@ public class AccountController {
 	}
 
 	@PostMapping(value = "/addAccount")
-//	@JsonIgnoreProperties(ignoreUnknown = true)
 	public Account addAccount(@RequestBody Account account) {
-		double temp1 = Math.random() * 100000;
-		double temp2 = Math.random() * 1000;
+		double temp1 =(long) ((Math.random() * 900000) + 100000);
+		double temp2 = (long) ((Math.random() * 9000) + 1000);
 		account.setAccountNumber((long)temp1);
 		account.setCustomerId((long)temp2);
-		account.setBalance(0l);
+		account.setBalance(0l);	
 		ser.save(account);
 		return ser.getOne(account.getCustomerId());
 	}
@@ -55,6 +54,14 @@ public class AccountController {
 		acc.setLastName(account.getLastName());
 		acc.setEmail(account.getEmail());
 		acc.setContactNumber(account.getContactNumber());
+		ser.save(acc);
+		return acc;
+	}
+	
+	@PostMapping("/resetPassword")
+	public Account resetPassword(@RequestBody Account account) {
+		Account acc = ser.getOne(account.getCustomerId());
+		acc.setPassword(account.getPassword());
 		ser.save(acc);
 		return acc;
 	}
@@ -74,7 +81,6 @@ public class AccountController {
 	}
 
 	@GetMapping(value = "/getAccountById/{id}")
-//	@JsonIgnoreProperties({"hibernateLazyInitializer","handler","transactions"})
 	public Account getAccountById(@PathVariable Long id) {
 		return ser.getOne(id);
 

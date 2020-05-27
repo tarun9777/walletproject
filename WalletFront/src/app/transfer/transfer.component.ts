@@ -46,10 +46,12 @@ export class TransferComponent implements OnInit {
 
   async submit() {
     try {
+      this.passwordFlag.value = false;
       if (this.transferForm.get("password").value != this.account.password) {
         this.passwordFlag.value = true;
         this.transferForm.reset();
       } else {
+        this.balanceFlag.value = false;
         let response = await this.accountService.transfer(
           this.otherAccount.customerId,
           this.customerId,
