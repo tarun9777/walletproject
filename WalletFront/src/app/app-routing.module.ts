@@ -12,7 +12,8 @@ import { WithdrawComponent } from "./withdraw/withdraw.component";
 import { TransferComponent } from "./transfer/transfer.component";
 import { AdminHomepageComponent } from "./admin-homepage/admin-homepage.component";
 import { ErrorComponent } from "./error/error.component";
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
+import { ChangePasswordComponent } from "./change-password/change-password.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -20,12 +21,13 @@ const routes: Routes = [
   { path: "adminLogin", component: AdminLoginComponent },
   { path: "forgetPassword", component: ForgetPasswordComponent },
   {
-    path: "navigation",
+    path: "user",
     component: UserNavigationComponent,
     children: [
       // { path: "", redirectTo:"/home", pathMatch:"full" },
       { path: "home", component: UserHomepageComponent },
       { path: "updateDetails", component: UpdateAccountComponent },
+      { path: "changePassword", component: ChangePasswordComponent },
       { path: "deposit", component: DepositComponent },
       { path: "withdraw", component: WithdrawComponent },
       { path: "transfer", component: TransferComponent },

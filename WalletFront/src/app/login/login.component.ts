@@ -15,7 +15,9 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.accountService.setCustomerId = null;
+  }
 
   loginData = null;
   failure = { value: false };
@@ -37,8 +39,11 @@ export class LoginComponent implements OnInit {
       if (response.ok) {
         this.loginData = await response.json();
         this.failure.value = false;
+
+        this.accountService.setCustomerId = this.loginForm.get('customerId').value;
+        
         this.router.navigate([
-          "/navigation",
+          "/user",
           { id: this.loginForm.get("customerId").value },
         ]);
       } else {

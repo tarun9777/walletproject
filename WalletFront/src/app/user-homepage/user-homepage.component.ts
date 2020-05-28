@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import {  Router } from "@angular/router";
 import { AccountService } from "../account.service";
 
 @Component({
@@ -9,7 +9,6 @@ import { AccountService } from "../account.service";
 })
 export class UserHomepageComponent implements OnInit {
   constructor(
-    private route: ActivatedRoute,
     private accountService: AccountService,
     private router: Router
   ) {}
@@ -20,15 +19,15 @@ export class UserHomepageComponent implements OnInit {
   contactNumber: number;
   accountNumber: number;
   balance: number;
-  transactions: any = null;
+  transactions: any[] = null;
 
   balanceFlag = { value: false };
   transactionFlag = { value: false };
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.customerId = parseInt(params.get("id"));
-    });
+    
+
+    this.customerId = parseInt(this.accountService.getCustomerId);
     this.getAccountDetails(this.customerId);
   }
 
@@ -77,6 +76,7 @@ export class UserHomepageComponent implements OnInit {
       let response = await this.accountService.getTransactions(this.customerId);
       if (response.ok) {
         this.transactions = await response.json();
+        this.transactions.sort( (a,b) => a.transactionId - b.transactionId);
         this.transactionFlag.value = true;
       }
     } catch (err){

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
-import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { AccountService } from "../account.service";
 
 @Component({
@@ -11,7 +11,6 @@ import { AccountService } from "../account.service";
 export class DepositComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private accountService: AccountService,
     private router: Router
   ) {}
@@ -27,7 +26,7 @@ export class DepositComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.customerId = parseInt(this.route.snapshot.paramMap.get("id"));
+    this.customerId = this.accountService.getCustomerId;
     this.getAccountDetails(this.customerId);
   }
 
@@ -43,7 +42,7 @@ export class DepositComponent implements OnInit {
           this.customerId
         );
         if (response.ok) {
-          this.router.navigate(["/navigation/home", { id: this.customerId }]);
+          this.router.navigate(["/user/home"]);
         } else {
           console.log("error");
         }

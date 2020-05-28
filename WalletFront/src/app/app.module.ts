@@ -16,11 +16,11 @@ import { DepositComponent } from "./deposit/deposit.component";
 import { WithdrawComponent } from "./withdraw/withdraw.component";
 import { TransferComponent } from "./transfer/transfer.component";
 import { AccountService } from "./account.service";
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
-import { ErrorComponent } from './error/error.component';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { AdminHomepageComponent } from "./admin-homepage/admin-homepage.component";
+import { ErrorComponent } from "./error/error.component";
+import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     AdminHomepageComponent,
     ErrorComponent,
     ForgetPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

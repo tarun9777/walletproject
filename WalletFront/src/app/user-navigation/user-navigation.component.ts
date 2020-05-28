@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AccountService } from "../account.service";
 
 @Component({
   selector: "app-user-navigation",
@@ -7,13 +8,17 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
   styleUrls: ["./user-navigation.component.css"],
 })
 export class UserNavigationComponent implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private accountService: AccountService
+  ) {}
 
   customerId: number = null;
 
   ngOnInit(): void {
-    this.customerId = parseInt(this.route.snapshot.paramMap.get("id"));
-    this.router.navigate(["/navigation/home", { id: this.customerId }]);
+    this.customerId = parseInt(this.accountService.getCustomerId);
+    this.router.navigate(["/user/home"]);
   }
 
   /**
@@ -21,7 +26,7 @@ export class UserNavigationComponent implements OnInit {
    */
 
   home() {
-    this.router.navigate(["/navigation/home", { id: this.customerId }]);
+    this.router.navigate(["/user/home"]);
   }
 
   /**
@@ -29,10 +34,7 @@ export class UserNavigationComponent implements OnInit {
    */
 
   updateDetails() {
-    this.router.navigate([
-      "/navigation/updateDetails",
-      { id: this.customerId },
-    ]);
+    this.router.navigate(["/user/updateDetails"]);
   }
 
   /**
@@ -40,7 +42,7 @@ export class UserNavigationComponent implements OnInit {
    */
 
   withdraw() {
-    this.router.navigate(["/navigation/withdraw", { id: this.customerId }]);
+    this.router.navigate(["/user/withdraw"]);
   }
 
   /**
@@ -48,7 +50,7 @@ export class UserNavigationComponent implements OnInit {
    */
 
   deposit() {
-    this.router.navigate(["/navigation/deposit", { id: this.customerId }]);
+    this.router.navigate(["/user/deposit"]);
   }
 
   /**
@@ -56,6 +58,6 @@ export class UserNavigationComponent implements OnInit {
    */
 
   transfer() {
-    this.router.navigate(["/navigation/transfer", { id: this.customerId }]);
+    this.router.navigate(["/user/transfer"]);
   }
 }
