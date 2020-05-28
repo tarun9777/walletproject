@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -7,7 +6,16 @@ import { HttpClient } from "@angular/common/http";
 export class AccountService {
   private baseUrl = "http://localhost:8081/account";
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
+  public get getCustomerId() {
+    // console.log("get called");
+    return localStorage.getItem('id');
+  }
+
+  public set setCustomerId(id) {
+    localStorage.setItem('id',id);
+    // console.log("cid is set " + id);
+  }
 
   validateLogin(loginData) {
     let fetchoptions = {

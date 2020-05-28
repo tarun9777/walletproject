@@ -36,7 +36,7 @@ export class TransferComponent implements OnInit {
   ngOnInit(): void {
     this.transferForm.get("amount").disable();
     this.transferForm.get("password").disable();
-    this.customerId = parseInt(this.route.snapshot.paramMap.get("id"));
+    this.customerId = this.accountService.getCustomerId;
     this.getAccountDetails(this.customerId);
   }
 
@@ -58,7 +58,7 @@ export class TransferComponent implements OnInit {
           this.transferForm.get("amount").value
         );
         if (response.ok) {
-          this.router.navigate(["/navigation/home", { id: this.customerId }]);
+          this.router.navigate(["/user/home"]);
         } else {
           this.balanceFlag.value = true;
           this.transferForm.reset();

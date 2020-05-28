@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { AccountService } from "../account.service";
-import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-withdraw",
@@ -27,7 +27,7 @@ export class WithdrawComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.customerId = parseInt(this.route.snapshot.paramMap.get("id"));
+    this.customerId = this.accountService.getCustomerId;
     this.getAccountDetails(this.customerId);
   }
 
@@ -46,7 +46,7 @@ export class WithdrawComponent implements OnInit {
           this.customerId
         );
         if (response.ok) {
-          this.router.navigate(["/navigation/home", { id: this.customerId }]);
+          this.router.navigate(["/user/home"]);
         } else {
           this.balanceFlag.value = true;
           this.withdrawForm.reset();

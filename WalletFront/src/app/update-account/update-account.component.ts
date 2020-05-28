@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router, ParamMap } from "@angular/router";
+import {  Router } from "@angular/router";
 import { AccountService } from "../account.service";
 
 @Component({
@@ -11,7 +11,6 @@ import { AccountService } from "../account.service";
 export class UpdateAccountComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private accountService: AccountService,
     private router: Router
   ) {}
@@ -43,8 +42,8 @@ export class UpdateAccountComponent implements OnInit {
         x.customerId = this.customerid;
         let response = await this.accountService.updateAccount(x);
         if (response.ok) {
-          console.log(await response.json());
-          this.router.navigate(["/navigation/home", { id: this.customerid }]);
+          // console.log(await response.json());
+          this.router.navigate(["/user/home"]);
         } else {
           console.log("error");
         }
@@ -76,7 +75,7 @@ export class UpdateAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerid = parseInt(this.route.snapshot.paramMap.get("id"));
+    this.customerid = this.accountService.getCustomerId;
     this.getAccountDetails(this.customerid);
   }
 }
